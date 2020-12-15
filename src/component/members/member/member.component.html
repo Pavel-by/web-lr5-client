@@ -1,0 +1,37 @@
+<div [class]="'uk-width-1-1 uk-panel uk-margin-top ' + cardClass">
+  <form class="uk-form">
+    <fieldset>
+      <legend *ngIf="legend != null">{{legend}}</legend>
+      <input name="name" type="text" [(ngModel)]="member.editor.name" [disabled]="member.disabled" placeholder="Имя"
+             (ngModelChange)="onInputChanged()"/>
+
+      <input name="money" type="text" [(ngModel)]="member.editor.money"
+             class="uk-margin-small-left"
+             [disabled]="member.disabled"
+             placeholder="Деньги"
+             (ngModelChange)="onInputChanged()"/>
+
+      <div class="uk-button-group uk-margin-small-left">
+        <button class="uk-button" type="button" (click)="save.emit(member)"
+                [disabled]="member.disabled || !editing">
+          Сохранить
+        </button>
+        <button *ngIf="canRefresh" class="uk-button" type="button"
+                (click)="member.editor.update(member.current); member.error = null; member.change.emit()"
+                [disabled]="member.disabled || !editing">
+          <i class="uk-icon-refresh"></i>
+        </button>
+      </div>
+
+      <button *ngIf="canDelete" class="uk-button uk-button-danger uk-margin-small-left" type="button"
+              (click)="delete.emit(member)"
+              [disabled]="member.disabled">
+        Удалить
+      </button>
+    </fieldset>
+
+    <div *ngIf="member.error" class="uk-form-row uk-margin-small-top">
+      <p class="uk-text-danger">{{member.error}}</p>
+    </div>
+  </form>
+</div>

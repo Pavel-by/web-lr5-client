@@ -1,0 +1,11 @@
+<h2>Редактирование акций</h2><hr>
+<div class="uk-grid uk-grid-medium uk-margin-large-bottom">
+  <div *ngFor="let share of shares" class="uk-width-1-3">
+    <app-share [share]="share" (save)="onSave(share)" cardClass="uk-panel-box" [canDelete]="true" [canRefresh]="true"
+               (delete)="onDelete(share)"></app-share>
+  </div>
+  <div class="uk-width-1-3">
+    <app-share [share]="editingShare" legend="Добавить" (save)="onAdd()" [canRefresh]="false"
+               cardClass="uk-panel-box uk-panel-box-primary" [canDelete]="false"></app-share>
+  </div>
+</div>

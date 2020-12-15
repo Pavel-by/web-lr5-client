@@ -1,0 +1,64 @@
+<div [class]="'uk-panel uk-margin-top ' + cardClass">
+  <form class="uk-form uk-form-stacked">
+    <legend *ngIf="legend != null">{{legend}}</legend>
+
+    <div class="uk-form-row">
+      <label class="uk-form-label">Название</label>
+      <input name="name" type="text" [(ngModel)]="share.editor.name" [disabled]="share.disabled"
+             (ngModelChange)="onInputChanged()"/>
+    </div>
+
+    <div class="uk-form-row">
+      <label class="uk-form-label">Распределение</label>
+      <select name="distribution" [(ngModel)]="share.editor.distribution" (ngModelChange)="onInputChanged()">
+        <option value="even">Равномерное</option>
+        <option value="normal">Нормальное</option>
+        <option value="binomial">Биномиальное</option>
+      </select>
+    </div>
+
+    <div class="uk-form-row">
+      <label class="uk-form-label">Максимальное изменение</label>
+      <input name="dispersion" type="number"
+             [(ngModel)]="share.editor.dispersion"
+             [disabled]="share.disabled"
+             (ngModelChange)="onInputChanged()"/>
+    </div>
+
+    <div class="uk-form-row">
+      <label class="uk-form-label">Начальная стоимость</label>
+      <input name="price" type="text" [(ngModel)]="share.editor.price" [disabled]="share.disabled"
+             (ngModelChange)="onInputChanged()"/>
+    </div>
+
+    <div class="uk-form-row">
+      <label class="uk-form-label">Количество</label>
+      <input name="count" type="text" [(ngModel)]="share.editor.count" [disabled]="share.disabled"
+             (ngModelChange)="onInputChanged()"/>
+    </div>
+
+    <div class="uk-form-row">
+      <div class="uk-button-group uk-margin-small-left">
+        <button class="uk-button" type="button" (click)="save.emit(share)"
+                [disabled]="share.disabled || !editing">
+          Сохранить
+        </button>
+        <button *ngIf="canRefresh" class="uk-button" type="button"
+                (click)="share.editor.update(share.current); share.error = null; share.change.emit()"
+                [disabled]="share.disabled || !editing">
+          <i class="uk-icon-refresh"></i>
+        </button>
+      </div>
+
+      <button *ngIf="canDelete" class="uk-button uk-button-danger uk-margin-small-left" type="button"
+              (click)="delete.emit(share)"
+               [disabled]="share.disabled">
+        Удалить
+      </button>
+    </div>
+
+    <div *ngIf="share.error" class="uk-form-row">
+      <p class="uk-text-danger">{{share.error}}</p>
+    </div>
+  </form>
+</div>

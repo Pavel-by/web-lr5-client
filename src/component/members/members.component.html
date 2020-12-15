@@ -1,0 +1,11 @@
+<h2>Редактирование участников</h2><hr>
+<div class="uk-margin-large-bottom uk-width-1-1">
+  <div *ngFor="let member of members" class="uk-width-1-1 uk-margin-bottom">
+    <app-member [member]="member" (save)="onSave(member)" cardClass="uk-panel-box" [canDelete]="true" [canRefresh]="true"
+               (delete)="onDelete(member)"></app-member>
+  </div>
+  <div class="uk-width-1-1">
+    <app-member [member]="editingMember" legend="Добавить" (save)="onAdd()" [canRefresh]="false"
+               cardClass="uk-panel-box uk-panel-box-primary" [canDelete]="false"></app-member>
+  </div>
+</div>

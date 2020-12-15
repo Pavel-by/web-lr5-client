@@ -1,0 +1,26 @@
+<form class="uk-form uk-form-stacked">
+  <h2>Параметры аукциона</h2><hr>
+
+  <div class="uk-form-row">
+    <label class="uk-form-label">Время начала и окончания</label>
+    <input name="startDate" type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss" class="uk-margin-small-right"
+           [(ngModel)]="start" [disabled]="!loaded" required/>
+    <input name="endDate"
+           type="datetime-local"
+           placeholder="yyyy-MM-ddTHH:mm:ss"
+           [(ngModel)]="end"
+           [disabled]="end == null"
+           required/>
+  </div>
+
+  <div class="uk-form-row">
+    <label class="uk-form-label">Интервал пересчета акций</label>
+    <input name="recomputeDuration" type="number" [(ngModel)]="recomputeDuration" [disabled]="!loaded" required/>
+  </div>
+
+  <div class="uk-form-row">
+    <button type="button" class="uk-button uk-button-primary" [disabled]="!loaded" (click)="save()">Сохранить
+    </button>
+    <span class="uk-text-danger uk-margin-small-left" [hidden]="error == null">{{error}}</span>
+  </div>
+</form>
